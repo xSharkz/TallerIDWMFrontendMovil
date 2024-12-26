@@ -1,0 +1,7 @@
+{
+  "name": "TallerIDWMFrontendMovil",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
