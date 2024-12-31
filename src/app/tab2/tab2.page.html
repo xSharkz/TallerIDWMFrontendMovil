@@ -1,13 +1,31 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title> Historial de Boletas </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content *ngIf="!loading">
+  <ion-list *ngIf="orders.length > 0">
+    <ion-item *ngFor="let order of orders">
+      <ion-label>
+        <h2>Boleta - Fecha: {{ order.date | date:'short' }}</h2>
+        <p>Total: ${{ order.totalPrice }}</p>
+        <ion-item *ngFor="let product of order.products">
+          <ion-label>
+            <p>Producto: {{ product.name }}</p>
+            <p>Tipo: {{ product.type }}</p>
+            <p>Precio Unitario: ${{ product.unitPrice }}</p>
+            <p>Cantidad: {{ product.quantity }}</p>
+            <p>Precio Total: ${{ product.totalPrice }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-item *ngIf="orders.length === 0">
+    <ion-label>No tienes boletas registradas.</ion-label>
+  </ion-item>
 </ion-content>
+
+<ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
