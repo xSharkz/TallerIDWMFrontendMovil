@@ -39,7 +39,7 @@ export class Tab1Page implements OnInit{
         const response = await this.authService.login({ email, password });
         if (response && response.token) {
           await this.authService.saveToken(response.token);
-          this.router.navigate(['/tab2']);
+          location.reload();
         } else {
           console.error('No se recibió un token válido.');
         }
@@ -54,6 +54,7 @@ export class Tab1Page implements OnInit{
       await this.authService.logout();
       this.isAuthenticated = false;
       this.loginForm.reset();
+      location.reload();
     } catch (error) {
       console.error('Error al cerrar sesión:', error);
     }
@@ -64,6 +65,7 @@ export class Tab1Page implements OnInit{
       await this.authService.deleteAccount();
       this.isAuthenticated = false;
       this.loginForm.reset();
+      location.reload();
     } catch (error) {
       console.error('Error al eliminar la cuenta:', error);
     }
