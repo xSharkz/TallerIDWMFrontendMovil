@@ -25,12 +25,13 @@ export class Tab1Page implements OnInit{
   async ngOnInit() {
     try {
       this.isAuthenticated = await this.authService.isAuthenticated();
+      console.log('¿Está autenticado?:', this.isAuthenticated);
     } catch (error) {
       console.error('Error al verificar autenticación:', error);
       this.isAuthenticated = false;
     }
   }
-
+  
   async onSubmit() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;

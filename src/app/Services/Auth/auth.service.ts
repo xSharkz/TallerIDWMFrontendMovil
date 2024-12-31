@@ -21,6 +21,7 @@ export class AuthService {
 
   async isAuthenticated(): Promise<boolean> {
     const token = await this.storage.get('jwt_token');
+    console.log('Token almacenado:', token);
     return !!token;
   }
 

@@ -1,3 +1,9 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Inicio </ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true">
   <ng-container *ngIf="isAuthenticated; else loginTemplate">
     <div class="center-buttons">
