@@ -10,7 +10,7 @@ export class Tab2Page implements OnInit {
 
   orders: any[] = [];
   loading: boolean = false;
-
+  error: string = '';  
   constructor(private orderService: OrderService) {}
 
   ngOnInit() {
@@ -19,13 +19,19 @@ export class Tab2Page implements OnInit {
 
   loadOrders(pageNumber: number = 1, pageSize: number = 10) {
     this.loading = true;
+    this.error = '';  
     this.orderService.getUserOrders(pageNumber, pageSize).subscribe(
       (response) => {
-        this.orders = response.orders; 
+        if (response && response.orders) {
+          this.orders = response.orders; 
+        } else {
+          this.error = 'No se encontraron órdenes';
+        }
         this.loading = false;
       },
       (error) => {
         console.error('Error al cargar las órdenes:', error);
+        this.error = 'Error al cargar las órdenes. Intenta de nuevo más tarde.';
         this.loading = false;
       }
     );

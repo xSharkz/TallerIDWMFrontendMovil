@@ -15,7 +15,8 @@ export class OrderService {
     const params = new HttpParams()
       .set('pageNumber', pageNumber.toString())
       .set('pageSize', pageSize.toString());
-      
-    return this.http.get<any>(this.baseUrl, { params });
+
+    return this.http.get<any>(`${this.baseUrl}/orders`, { params });
   }
 }
+

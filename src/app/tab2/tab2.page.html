@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title> Historial de Boletas </ion-title>
+    <ion-title>Historial de Boletas</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,6 +10,7 @@
       <ion-label>
         <h2>Boleta - Fecha: {{ order.date | date:'short' }}</h2>
         <p>Total: ${{ order.totalPrice }}</p>
+        
         <ion-item *ngFor="let product of order.products">
           <ion-label>
             <p>Producto: {{ product.name }}</p>
