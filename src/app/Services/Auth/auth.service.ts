@@ -29,19 +29,31 @@ export class AuthService {
     await this.storage.set('jwt_token', token);
   }
 
-  logout() {
+  async logout() {
     return this.http.post(`${this.baseUrl}/logout`, {}).toPromise()
+      .then(() => {
+        this.storage.clear(); 
+        console.log('Sesión cerrada correctamente');
+      })
       .catch(error => {
-      if (error.status === 401) {
-        console.warn('El token ya no es válido.');
-      }
-      this.storage.remove('jwt_token'); 
-    });
+        if (error.status === 401) {
+          console.warn('El token ya no es válido.');
+        }
+        this.storage.remove('jwt_token'); 
+      });
   }
+  
 
-  deleteAccount() {
-    return this.http.delete(`${this.baseUrl}/delete-account`).toPromise().then(() => {
-      this.storage.remove('jwt_token');
-    });
+  async deleteAccount() {
+    return this.http.delete(`${this.baseUrl}/delete-account`).toPromise()
+      .then(() => {
+        this.storage.clear();
+        console.log('Cuenta eliminada y sesión cerrada');
+      })
+      .catch((error) => {
+        console.error('Error al eliminar la cuenta:', error);
+        this.storage.remove('jwt_token'); 
+      });
   }
+  
 }
