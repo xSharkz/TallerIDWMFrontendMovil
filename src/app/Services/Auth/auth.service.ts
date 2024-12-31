@@ -27,4 +27,20 @@ export class AuthService {
   async saveToken(token: string) {
     await this.storage.set('jwt_token', token);
   }
+
+  logout() {
+    return this.http.post(`${this.baseUrl}/logout`, {}).toPromise()
+      .catch(error => {
+      if (error.status === 401) {
+        console.warn('El token ya no es válido.');
+      }
+      this.storage.remove('jwt_token'); 
+    });
+  }
+
+  deleteAccount() {
+    return this.http.delete(`${this.baseUrl}/delete-account`).toPromise().then(() => {
+      this.storage.remove('jwt_token');
+    });
+  }
 }
