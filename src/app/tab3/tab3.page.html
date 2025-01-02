@@ -5,25 +5,27 @@
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-label>Filtrar por Tipo</ion-label>
-    <ion-select [(ngModel)]="selectedType" (ionChange)="getProducts()">
-      <ion-select-option value="">Todos</ion-select-option>
-      <ion-select-option value="Poleras">Poleras</ion-select-option>
-      <ion-select-option value="Gorros">Gorros</ion-select-option>
-      <ion-select-option value="Juguetería">Juguetería</ion-select-option>
-      <ion-select-option value="Alimentación">Alimentación</ion-select-option>
-      <ion-select-option value="Libros">Libros</ion-select-option>
-    </ion-select>
-  </ion-item>
+  <div class="filters">
+    <ion-item>
+      <ion-label>Filtrar por Tipo</ion-label>
+      <ion-select [(ngModel)]="selectedType" (ionChange)="getProducts()">
+        <ion-select-option value="">Todos</ion-select-option>
+        <ion-select-option value="Poleras">Poleras</ion-select-option>
+        <ion-select-option value="Gorros">Gorros</ion-select-option>
+        <ion-select-option value="Juguetería">Juguetería</ion-select-option>
+        <ion-select-option value="Alimentación">Alimentación</ion-select-option>
+        <ion-select-option value="Libros">Libros</ion-select-option>
+      </ion-select>
+    </ion-item>
 
-  <ion-item>
-    <ion-label>Ordenar por Precio</ion-label>
-    <ion-select [(ngModel)]="sortOrder" (ionChange)="getProducts()">
-      <ion-select-option value="asc">Ascendente</ion-select-option>
-      <ion-select-option value="desc">Descendente</ion-select-option>
-    </ion-select>
-  </ion-item>
+    <ion-item>
+      <ion-label>Ordenar por Precio</ion-label>
+      <ion-select [(ngModel)]="sortOrder" (ionChange)="getProducts()">
+        <ion-select-option value="asc">Ascendente</ion-select-option>
+        <ion-select-option value="desc">Descendente</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
 
   <ion-list>
     <ion-item *ngFor="let product of products">
@@ -33,7 +35,7 @@
       <ion-label>
         <h2>{{ product.name }}</h2>
         <p>{{ product.type }}</p>
-        <p>\${{ product.price }}</p>
+        <p>${{ product.price }} CLP</p>
         <p>Stock: {{ product.stockQuantity }}</p>
       </ion-label>
       <ion-button (click)="addToCart(product)">Añadir al carrito</ion-button>
