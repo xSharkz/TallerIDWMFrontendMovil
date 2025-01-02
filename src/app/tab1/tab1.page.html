@@ -1,26 +1,26 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Inicio </ion-title>
+    <ion-title>Inicio</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ng-container *ngIf="isAuthenticated; else loginTemplate">
     <div class="center-buttons">
-      <ion-button expand="block" color="primary" (click)="logout()">Cerrar Sesión</ion-button>
-      <ion-button expand="block" color="danger" (click)="deleteAccount()">Eliminar Cuenta</ion-button>
+      <ion-button color="primary" (click)="logout()">Cerrar Sesión</ion-button>
+      <ion-button color="danger" (click)="deleteAccount()">Eliminar Cuenta</ion-button>
     </div>
   </ng-container>
 
   <ng-template #loginTemplate>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <ion-item>
-        <ion-label position="floating">Email</ion-label>
-        <ion-input formControlName="email" type="email"></ion-input>
+      <ion-label>Email</ion-label>
+      <ion-item class="input-item">
+        <ion-input formControlName="email" type="email" placeholder="martin@idwm.cl"></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label position="floating">Contraseña</ion-label>
-        <ion-input formControlName="password" type="password"></ion-input>
+      <ion-label>Contraseña</ion-label>
+      <ion-item class="input-item">
+        <ion-input formControlName="password" type="password" placeholder="martin123"></ion-input>
       </ion-item>
       <ion-button expand="block" type="submit" [disabled]="!loginForm.valid">Iniciar Sesión</ion-button>
     </form>
