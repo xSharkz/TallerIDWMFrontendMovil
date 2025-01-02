@@ -22,10 +22,23 @@ export class Tab2Page implements OnInit {
     this.error = '';  
     this.orderService.getUserOrders(pageNumber, pageSize).subscribe(
       (response) => {
-        if (response && response.orders) {
-          this.orders = response.orders; 
+        if (response && response.items) {
+          this.orders = response.items.map((order: any) => ({
+            date: order.orderDate,
+            totalPrice: order.totalAmount,
+            //TODO: Debido a la falta de Mappeo dentro del Backend, no se puede
+            //acceder a la información general del producto, por lo que el "type"
+            //esta hardcodeado y asi con las demás variables.
+            products: order.orderItems.map((item: any) => ({
+              name: `${item.productId}`,
+              type: 'Desconocido',
+              unitPrice: item.unitPrice,
+              quantity: item.quantity,
+              totalPrice: item.unitPrice * item.quantity,
+            })),
+          }));
         } else {
-          this.error = 'No se encontraron órdenes';
+          this.error = 'No se encontraron órdenes.';
         }
         this.loading = false;
       },
