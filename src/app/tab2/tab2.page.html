@@ -4,29 +4,28 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="!loading">
+<ion-content *ngIf="!loading" class="content">
   <ion-list *ngIf="orders.length > 0">
-    <ion-item *ngFor="let order of orders">
-      <ion-label>
-        <h2>Boleta - Fecha: {{ order.date | date:'short' }}</h2>
-        <p>Total: ${{ order.totalPrice }}</p>
-        
-        <ion-item *ngFor="let product of order.products">
+    <ion-card *ngFor="let order of orders" class="order-card">
+      <ion-card-header>
+        <h2>{{ order.date | date: 'dd/MM/yyyy' }}</h2>
+        <h1 class="total-price">${{ order.totalPrice | number }} CLP</h1>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item *ngFor="let product of order.products" lines="none" class="product-item">
           <ion-label>
-            <p>Producto: {{ product.name }}</p>
-            <p>Tipo: {{ product.type }}</p>
-            <p>Precio Unitario: ${{ product.unitPrice }}</p>
-            <p>Cantidad: {{ product.quantity }}</p>
-            <p>Precio Total: ${{ product.totalPrice }}</p>
+            <p>
+              {{ product.name }} | {{ product.type }} | ${{ product.unitPrice | number }} | {{ product.quantity }} | ${{ product.totalPrice | number }}
+            </p>
           </ion-label>
         </ion-item>
-      </ion-label>
-    </ion-item>
+      </ion-card-content>
+    </ion-card>
   </ion-list>
 
-  <ion-item *ngIf="orders.length === 0">
-    <ion-label>No tienes boletas registradas.</ion-label>
-  </ion-item>
+  <div *ngIf="orders.length === 0" class="empty-message">
+    <p>No hay más boletas para mostrar.</p>
+  </div>
 </ion-content>
 
 <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
