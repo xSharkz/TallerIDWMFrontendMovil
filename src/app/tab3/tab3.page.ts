@@ -26,20 +26,33 @@ export class Tab3Page implements OnInit {
     this.getProducts();
   }
 
-  getProducts() {
+  getProducts(event?: any) {
     this.productService
       .getAvailableProducts(this.selectedType, this.sortOrder, this.pageNumber, this.pageSize)
       .subscribe((response: any) => {
-        this.products = response.products;
+        if (event) {
+          this.products = [...this.products, ...response.products];
+          event.target.complete();
+        } else {
+          this.products = response.products;
+        }
         this.totalItems = response.totalItems;
+
+        if (this.products.length >= this.totalItems && event) {
+          event.target.disabled = true;
+        }
+      }, (error) => {
+        if (event) {
+          event.target.complete(); 
+        }
+        console.error('Error al obtener productos:', error);
       });
   }
 
   loadData(event: any) {
     if (this.products.length < this.totalItems) {
       this.pageNumber++;
-      this.getProducts();
-      event.target.complete();
+      this.getProducts(event);
     } else {
       event.target.disabled = true;
     }
