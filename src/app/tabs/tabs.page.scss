@@ -1,1 +1,35 @@
-
+:host {
+    ion-tab-bar {
+        --background: #C4ECFE; 
+        border-top: 1px solid #1b1b1b;
+        box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        height: 80px;
+        ion-tab-button {
+            color: #666666;
+            font-size: 14px;
+    
+            ion-icon {
+                font-size: 26px;
+                margin-bottom: 3%;
+                color: #666666; 
+            }
+            ion-label {
+                font-size: 14px;
+                font-weight: 500;
+                color: #666666;
+            }
+    
+            &.tab-selected {
+                ion-icon {
+                    color: #005eb8; 
+                    font-weight: 600;
+                }
+                ion-label {
+                    color: #005eb8; 
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}
+  
