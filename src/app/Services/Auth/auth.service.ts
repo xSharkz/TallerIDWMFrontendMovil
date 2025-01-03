@@ -15,7 +15,9 @@ export class AuthService {
     formData.append('password', credentials.password);
 
     return this.http
-      .post<{ token: string }>(`${this.baseUrl}/login`, formData)
+      .post<{ token: string }>(`${this.baseUrl}/login`, formData, {
+        withCredentials: true,
+      })
       .toPromise();
   }
 
@@ -30,7 +32,9 @@ export class AuthService {
   }
 
   async logout() {
-    return this.http.post(`${this.baseUrl}/logout`, {}).toPromise()
+    return this.http.post(`${this.baseUrl}/logout`, {}, {
+      withCredentials: true,
+    }).toPromise()
       .then(() => {
         this.storage.clear(); 
         console.log('Sesión cerrada correctamente');
