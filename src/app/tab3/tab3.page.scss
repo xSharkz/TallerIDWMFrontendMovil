@@ -1,4 +1,10 @@
 :host {
+  .cart-button {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+  }
+
   .filters{
     margin-top: 3%;
     padding: 5%;

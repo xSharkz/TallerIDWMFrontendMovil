@@ -15,6 +15,7 @@ import { CartService } from '../Services/Cart/cart.service';
 export class Tab3Page implements OnInit {
 
   products: any[] = [];  // Lista para almacenar los productos disponibles
+  cartCount: number = 0;  // Variable para el número de productos en el carrito
   selectedType: string = '';  // Filtro por tipo de producto seleccionado
   sortOrder: string = 'asc';  // Orden de clasificación de los productos (ascendente por defecto)
   pageNumber: number = 1;  // Número de página para la paginación (por defecto 1)
@@ -35,6 +36,10 @@ export class Tab3Page implements OnInit {
    */
   ngOnInit() {
     this.getProducts(); // Llama al método para obtener los productos al inicializar el componente
+    this.cartService.cart$.subscribe(cart => {
+      this.updateCartCount();
+      console.log('Carrito actualizado:', cart);
+    });
   }
   /**
    * Método para obtener los productos disponibles desde el backend.
@@ -84,6 +89,15 @@ export class Tab3Page implements OnInit {
    */
   addToCart(product: any) {
     this.cartService.addToCart(product); // Llama al servicio de carrito para agregar el producto
+    this.updateCartCount(); // Actualizamos el contador
+  }
+  
+  /**
+   * Método para actualizar el contador de productos en el carrito
+
+   */
+  updateCartCount() {
+    this.cartCount = this.cartService.getCartCount();
   }
 
 }
