@@ -1,5 +1,4 @@
 :host {
-
   .content {
     --background-color: transparent;
     padding: 16px;
@@ -7,7 +6,7 @@
       background: transparent;
     }
     .order-card {
-      --background: #6DC6FE; 
+      --background: #6DC6FE;
       border-radius: 12px;
       border-color: #000;
       margin-bottom: 3%;
@@ -61,5 +60,82 @@
     height: 50px;
     --spinner-color: #ffffff;
   }
+
+  @media (max-width: 767px) {
+    .order-card {
+      --background: #6DC6FE;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      margin-bottom: 15px;
+    }
+    .total-price {
+      font-size: 20px;
+    }
+    ion-card-header {
+      flex-direction: column;
+      text-align: center;
+      h2 {
+        font-size: 18px;
+      }
+      .total-price {
+        font-size: 22px;
+      }
+    }
+    ion-item p {
+      font-size: 12px;
+      padding: 5px 0;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .order-card {
+      --background: #6DC6FE;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      margin-bottom: 20px;
+    }
+    .total-price {
+      font-size: 22px;
+    }
+    ion-card-header {
+      flex-direction: row;
+      justify-content: space-between;
+      h2 {
+        font-size: 18px;
+      }
+      .total-price {
+        font-size: 24px;
+      }
+    }
+    ion-item p {
+      font-size: 13px;
+      padding: 8px 0;
+    }
+  }
+
+  @media (min-width: 1025px) {
+    .order-card {
+      --background: #6DC6FE;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      margin-bottom: 3%;
+    }
+    .total-price {
+      font-size: 24px;
+    }
+    ion-card-header {
+      flex-direction: row;
+      justify-content: space-between;
+      h2 {
+        font-size: 20px;
+      }
+      .total-price {
+        font-size: 26px;
+      }
+    }
+    ion-item p {
+      font-size: 14px;
+      padding: 10px 0;
+    }
+  }
 }
-  
