@@ -1,17 +1,28 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title>Inicio</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ng-container *ngIf="isAuthenticated; else loginTemplate">
+    <div class="center-buttons">
+      <ion-button color="primary" (click)="logout()">Cerrar Sesión</ion-button>
+      <ion-button color="danger" (click)="deleteAccount()">Eliminar Cuenta</ion-button>
+    </div>
+  </ng-container>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ng-template #loginTemplate>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <ion-label>Email</ion-label>
+      <ion-item class="input-item">
+        <ion-input formControlName="email" type="email" placeholder="martin@idwm.cl"></ion-input>
+      </ion-item>
+      <ion-label>Contraseña</ion-label>
+      <ion-item class="input-item">
+        <ion-input formControlName="password" type="password" placeholder="martin123"></ion-input>
+      </ion-item>
+      <ion-button expand="block" type="submit" [disabled]="!loginForm.valid">Iniciar Sesión</ion-button>
+    </form>
+  </ng-template>
 </ion-content>
